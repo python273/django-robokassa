@@ -1,6 +1,6 @@
 #coding: utf-8
 
-from hashlib import md5
+from hashlib import sha256
 from urllib import urlencode
 from django import forms
 
@@ -32,7 +32,7 @@ class BaseRobokassaForm(forms.Form):
         return extra
 
     def _get_signature(self):
-        return md5(self._get_signature_string()).hexdigest().upper()
+        return sha256(self._get_signature_string()).hexdigest()
 
     def _get_signature_string(self):
         raise NotImplementedError
@@ -52,7 +52,7 @@ class RobokassaForm(BaseRobokassaForm):
     # описание покупки
     Desc = forms.CharField(max_length=100, required=False)
 
-    # контрольная сумма MD5
+    # контрольная сумма SHA256
     SignatureValue = forms.CharField(max_length=32)
 
     # предлагаемая валюта платежа
