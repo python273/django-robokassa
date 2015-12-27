@@ -5,7 +5,7 @@ from urllib import urlencode
 from django import forms
 
 from robokassa.conf import LOGIN, PASSWORD1, PASSWORD2
-from robokassa.conf import STRICT_CHECK, FORM_TARGET, EXTRA_PARAMS
+from robokassa.conf import STRICT_CHECK, FORM_TARGET, EXTRA_PARAMS, TEST_MODE
 from robokassa.models import SuccessNotification
 
 class BaseRobokassaForm(forms.Form):
@@ -94,6 +94,10 @@ class RobokassaForm(BaseRobokassaForm):
                   for name, field in self.fields.items()
                   if _initial(name, field)
                  ]
+
+        if TEST_MODE:
+            fields += [('IsTest', '1')]
+
         params = urlencode(fields)
         return self.target+'?'+params
 
