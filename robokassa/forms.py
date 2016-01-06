@@ -32,7 +32,7 @@ class BaseRobokassaForm(forms.Form):
         return extra
 
     def _get_signature(self):
-        return sha256(self._get_signature_string()).hexdigest()
+        return sha256(self._get_signature_string()).hexdigest().lower()
 
     def _get_signature_string(self):
         raise NotImplementedError
@@ -120,7 +120,7 @@ class ResultURLForm(BaseRobokassaForm):
 
     def clean(self):
         try:
-            signature = self.cleaned_data['SignatureValue'].upper()
+            signature = self.cleaned_data['SignatureValue'].lower()
             if signature != self._get_signature():
                 raise forms.ValidationError(u'Ошибка в контрольной сумме')
         except KeyError:
