@@ -116,6 +116,7 @@ class ResultURLForm(BaseRobokassaForm):
     '''Форма для приема результатов и проверки контрольной суммы '''
     OutSum = forms.CharField(max_length=15)
     InvId = forms.IntegerField(min_value=0)
+    IncCurrLabel = forms.CharField(max_length=32)
     SignatureValue = forms.CharField(max_length=64)
 
     def clean(self):
