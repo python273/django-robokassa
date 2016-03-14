@@ -8,7 +8,7 @@ from .conf import LOGIN
 
 def get_xml(url, params):
     urlencoded = urllib.urlencode(params)
-    f = urllib.urlopen(url + '?' + urlencoded)
+    f = urllib.urlopen(url + '?' + urlencoded, timeout=5)
     return minidom.parseString(f.read())
 
 
@@ -19,7 +19,6 @@ def get_currencies():
         'Language': 'ru'
     }
     response = get_xml(url, values)
-    global response
     groups_dom = response.getElementsByTagName('Groups')[0].getElementsByTagName('Group')
 
     currencies = []
