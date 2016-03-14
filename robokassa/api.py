@@ -7,7 +7,7 @@ from .conf import LOGIN
 # robokassa api is s*it
 
 def get_xml(url, params):
-    text = requests.get(url, params=params, timeout=5).text
+    text = requests.get(url, params=params, timeout=3).text
     return minidom.parseString(text)
 
 
