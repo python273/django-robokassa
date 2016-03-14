@@ -1,5 +1,5 @@
 from xml.dom import minidom
-import urllib
+import requests
 
 from .conf import LOGIN
 
@@ -7,9 +7,8 @@ from .conf import LOGIN
 # robokassa api is s*it
 
 def get_xml(url, params):
-    urlencoded = urllib.urlencode(params)
-    f = urllib.urlopen(url + '?' + urlencoded, timeout=5)
-    return minidom.parseString(f.read())
+    text = requests.get(url, params=params, timeout=5).text
+    return minidom.parseString(text)
 
 
 def get_currencies():
