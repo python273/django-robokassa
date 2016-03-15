@@ -8,7 +8,7 @@ from .conf import LOGIN
 
 def get_xml(url, params):
     text = requests.get(url, params=params, timeout=3).text
-    return minidom.parseString(text)
+    return minidom.parseString(text.encode('utf-8'))
 
 
 def get_currencies():
