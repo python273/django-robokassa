@@ -1,14 +1,14 @@
 from xml.dom import minidom
+
 import requests
 
 from .conf import LOGIN
 
 
-# robokassa api is s*it
-
 def get_xml(url, params):
-    text = requests.get(url, params=params, timeout=3).text
-    return minidom.parseString(text.encode('utf-8'))
+    return minidom.parseString(
+        requests.get(url, params=params, timeout=3).content
+    )
 
 
 def get_currencies():
